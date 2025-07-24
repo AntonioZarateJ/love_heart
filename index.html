@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>love</title>
+    <link rel="stylesheet" href="css/love.css">
+</head>
+
+<body>
+
+
+    <div id="main-container" class="container" onselectstart="return false;" unselectable="on">
+
+        <div class="shooter">
+            <img id="gifBiu" src="images/biubiubiu.gif" alt="Disparando amor" ondragstart="return false;">
+        </div>
+
+        </div>
+		
+
+    <script>
+        const gif = document.getElementById("gifBiu");
+        if (gif) {
+            gif.src = gif.src + "?t=" + new Date().getTime();
+        }
+    </script>
+    <script type="text/javascript" src="js/love.js"></script>
+</body>
+ 
+</html>
