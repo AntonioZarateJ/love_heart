@@ -27,9 +27,6 @@ const SPACE =   ['000', '000', '000', '000'];
 const PHRASE_LINE1 = [
   LETTER_T, LETTER_E, SPACE, LETTER_A, LETTER_M, LETTER_O
 ];
-const PHRASE_LINE2 = [
-  LETTER_M, LETTER_I, SPACE, LETTER_V, LETTER_I, LETTER_D, LETTER_A, SPACE, LETTER_I, LETTER_R, LETTER_E, LETTER_N
-];
 
 const SHOOT_SPEED = 60;
 const INITIAL_DELAY = 2600;
@@ -46,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
         shootShape(BIG_HEART_SHAPE, mainContainer, heartOrigin).then(async () => {
             await animateWords(mainContainer, wordsOrigin, PHRASE_LINE1);
-            await animateWords(mainContainer, wordsOrigin2, PHRASE_LINE2);
             showDedicatoria();
         });
     }, INITIAL_DELAY);
@@ -108,41 +104,61 @@ function getShapeWidth(shapeArray) {
     return Math.max(...shapeArray.map(row => row.length));
 }
 
-// Dedicatoria con foto
 function showDedicatoria() {
     const dedicatoria = document.createElement("div");
     dedicatoria.style.position = "fixed";
     dedicatoria.style.left = "50%";
     dedicatoria.style.top = "14%";
     dedicatoria.style.transform = "translate(-50%, -50%)";
-    dedicatoria.style.fontSize = "2em";
+    dedicatoria.style.fontSize = "1.8em";
     dedicatoria.style.opacity = "0";
     dedicatoria.style.transition = "opacity 2s";
     dedicatoria.style.color = "#d63384";
     dedicatoria.style.fontWeight = "bold";
     dedicatoria.style.textShadow = "1px 1px 8px #fff, 2px 2px 12px #f89";
     dedicatoria.style.display = "flex";
+    dedicatoria.style.flexDirection = "column";
     dedicatoria.style.alignItems = "center";
-    dedicatoria.style.gap = "18px";
+    dedicatoria.style.gap = "10px";
+    dedicatoria.style.textAlign = "center";
+    dedicatoria.style.maxWidth = "90vw";
+    dedicatoria.style.zIndex = "999";
 
     // Texto
     const span = document.createElement("span");
     span.innerText = "Amor, gracias por estar en mi vida. Eres mi todo 🫶";
     dedicatoria.appendChild(span);
 
-    // Imagen (coloca aquí la ruta de tu imagen)
-    const img = document.createElement("img");
-    img.src = "images/Photo.jpg";
-    img.alt = "Photo";
-    img.style.width = "80px";
-    img.style.height = "80px";
-    img.style.objectFit = "cover";
-    img.style.borderRadius = "50%";
-    img.style.boxShadow = "0 2px 8px #fff, 0 4px 12px #f89";
-    dedicatoria.appendChild(img);
+    // Contenedor de las imágenes
+    const imgContainer = document.createElement("div");
+    imgContainer.style.display = "flex";
+    imgContainer.style.justifyContent = "center";
+    imgContainer.style.gap = "12px";
+    imgContainer.style.flexWrap = "wrap";
 
+    const photoPaths = [
+        "images/Photo.jpg",
+        "images/Photo_3.jpg"
+    ];
+
+    for (const src of photoPaths) {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = "Foto Iren";
+        img.style.width = "120px";
+        img.style.height = "120px";
+        img.style.objectFit = "cover";
+        img.style.borderRadius = "50%";
+        img.style.boxShadow = "0 2px 8px #fff, 0 4px 12px #f89";
+        imgContainer.appendChild(img);
+    }
+
+    dedicatoria.appendChild(imgContainer);
     document.body.appendChild(dedicatoria);
+
     setTimeout(() => {
         dedicatoria.style.opacity = "1";
     }, 300);
 }
+
+
